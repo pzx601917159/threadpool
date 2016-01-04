@@ -15,6 +15,7 @@
 
 class Task;
 class Mutex;
+class Cond;
 
 class ThreadPool
 {
@@ -44,6 +45,7 @@ class ThreadPool
     volatile bool m_state;              //线程池状态
     uint32_t m_size;                    //线程池大小
     Mutex* m_lock;            //线程池中的锁
+    Cond* m_cond;
 };
 
 #endif //_THREADPOOL_H

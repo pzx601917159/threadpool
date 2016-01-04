@@ -5,6 +5,7 @@
 	> Created Time: Thursday 31 December 2015 02:19:07 PM CST
  ********************************************************************/
 #include "mutex.h"
+#include <iostream>
 
 void Mutex::Lock()
 {
@@ -35,3 +36,41 @@ Mutex::~Mutex()
     pthread_mutex_destroy(&m_lock);
     pthread_mutexattr_destroy(&m_attr);
 }
+
+pthread_mutex_t* Mutex::GetMutex()
+{
+    return &m_lock;
+}
+
+Cond::Cond()
+{
+    pthread_cond_init(&m_cond, NULL);
+}
+
+Cond::~Cond()
+{
+    pthread_cond_destroy(&m_cond);
+}
+
+Cond* Cond::Instance()
+{
+    static Cond cond;
+    return &cond;
+}
+
+void Cond::Signal()
+{
+    pthread_cond_signal(&m_cond);
+}
+
+void Cond::Broadcast()
+{
+    pthread_cond_broadcast(&m_cond);
+}
+
+
+void Cond::Wait(pthread_mutex_t* mutex)
+{
+    pthread_cond_wait(&m_cond,mutex);
+}
+

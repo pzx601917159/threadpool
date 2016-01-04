@@ -6,20 +6,20 @@
  ********************************************************************/
 #include "threadpool.h"
 #include "task.h"
+#include <unistd.h>
 int main()
 {
     //创建10个线程
     ThreadPool threadpool(10);
     threadpool.Init();
-    threadpool.Start();
 
     //插入任务
     Task* task = new Task();
     threadpool.AddTask(task);
 
+    sleep(1); 
+    //停止
     threadpool.Stop();
-
-
     return 0;
 }
 

@@ -10,5 +10,5 @@
 
 void Task::OnTask()
 {
-    std::cout << "On Task" << std::endl;
+    std::cout << "On Task\n";
 }
